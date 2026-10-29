@@ -10,15 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as BienvenidaRouteImport } from './routes/bienvenida'
 import { Route as IngresarRouteImport } from './routes/ingresar'
 import { Route as MembresiaRouteImport } from './routes/membresia'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as SeguridadRouteImport } from './routes/seguridad'
+import { Route as AppInicioRouteImport } from './routes/_app/inicio'
+import { Route as AppInvestigacionRouteImport } from './routes/_app/investigacion'
+import { Route as AppMapaRouteImport } from './routes/_app/mapa'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BienvenidaRoute = BienvenidaRouteImport.update({
@@ -46,6 +54,21 @@ const SeguridadRoute = SeguridadRouteImport.update({
   path: '/seguridad',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppInicioRoute = AppInicioRouteImport.update({
+  id: '/inicio',
+  path: '/inicio',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInvestigacionRoute = AppInvestigacionRouteImport.update({
+  id: '/investigacion',
+  path: '/investigacion',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMapaRoute = AppMapaRouteImport.update({
+  id: '/mapa',
+  path: '/mapa',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +77,9 @@ export interface FileRoutesByFullPath {
   '/membresia': typeof MembresiaRoute
   '/registro': typeof RegistroRoute
   '/seguridad': typeof SeguridadRoute
+  '/inicio': typeof AppInicioRoute
+  '/investigacion': typeof AppInvestigacionRoute
+  '/mapa': typeof AppMapaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,15 +88,22 @@ export interface FileRoutesByTo {
   '/membresia': typeof MembresiaRoute
   '/registro': typeof RegistroRoute
   '/seguridad': typeof SeguridadRoute
+  '/inicio': typeof AppInicioRoute
+  '/investigacion': typeof AppInvestigacionRoute
+  '/mapa': typeof AppMapaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
   '/bienvenida': typeof BienvenidaRoute
   '/ingresar': typeof IngresarRoute
   '/membresia': typeof MembresiaRoute
   '/registro': typeof RegistroRoute
   '/seguridad': typeof SeguridadRoute
+  '/_app/inicio': typeof AppInicioRoute
+  '/_app/investigacion': typeof AppInvestigacionRoute
+  '/_app/mapa': typeof AppMapaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +114,9 @@ export interface FileRouteTypes {
     | '/membresia'
     | '/registro'
     | '/seguridad'
+    | '/inicio'
+    | '/investigacion'
+    | '/mapa'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,18 +125,26 @@ export interface FileRouteTypes {
     | '/membresia'
     | '/registro'
     | '/seguridad'
+    | '/inicio'
+    | '/investigacion'
+    | '/mapa'
   id:
     | '__root__'
     | '/'
+    | '/_app'
     | '/bienvenida'
     | '/ingresar'
     | '/membresia'
     | '/registro'
     | '/seguridad'
+    | '/_app/inicio'
+    | '/_app/investigacion'
+    | '/_app/mapa'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   BienvenidaRoute: typeof BienvenidaRoute
   IngresarRoute: typeof IngresarRoute
   MembresiaRoute: typeof MembresiaRoute
@@ -115,6 +159,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bienvenida': {
@@ -152,11 +203,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SeguridadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/inicio': {
+      id: '/_app/inicio'
+      path: '/inicio'
+      fullPath: '/inicio'
+      preLoaderRoute: typeof AppInicioRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/investigacion': {
+      id: '/_app/investigacion'
+      path: '/investigacion'
+      fullPath: '/investigacion'
+      preLoaderRoute: typeof AppInvestigacionRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/mapa': {
+      id: '/_app/mapa'
+      path: '/mapa'
+      fullPath: '/mapa'
+      preLoaderRoute: typeof AppMapaRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppInicioRoute: typeof AppInicioRoute
+  AppInvestigacionRoute: typeof AppInvestigacionRoute
+  AppMapaRoute: typeof AppMapaRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppInicioRoute: AppInicioRoute,
+  AppInvestigacionRoute: AppInvestigacionRoute,
+  AppMapaRoute: AppMapaRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   BienvenidaRoute: BienvenidaRoute,
   IngresarRoute: IngresarRoute,
   MembresiaRoute: MembresiaRoute,

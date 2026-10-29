@@ -19,6 +19,10 @@ import { Route as SeguridadRouteImport } from './routes/seguridad'
 import { Route as AppInicioRouteImport } from './routes/_app/inicio'
 import { Route as AppInvestigacionRouteImport } from './routes/_app/investigacion'
 import { Route as AppMapaRouteImport } from './routes/_app/mapa'
+import { Route as AppMascotaRouteImport } from './routes/_app/mascota'
+import { Route as AppNotificacionesRouteImport } from './routes/_app/notificaciones'
+import { Route as AppPerfilRouteImport } from './routes/_app/perfil'
+import { Route as AppPreparacionRouteImport } from './routes/_app/preparacion'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -69,6 +73,26 @@ const AppMapaRoute = AppMapaRouteImport.update({
   path: '/mapa',
   getParentRoute: () => AppRoute,
 } as any)
+const AppMascotaRoute = AppMascotaRouteImport.update({
+  id: '/mascota',
+  path: '/mascota',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificacionesRoute = AppNotificacionesRouteImport.update({
+  id: '/notificaciones',
+  path: '/notificaciones',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPerfilRoute = AppPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPreparacionRoute = AppPreparacionRouteImport.update({
+  id: '/preparacion',
+  path: '/preparacion',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -80,6 +104,10 @@ export interface FileRoutesByFullPath {
   '/inicio': typeof AppInicioRoute
   '/investigacion': typeof AppInvestigacionRoute
   '/mapa': typeof AppMapaRoute
+  '/mascota': typeof AppMascotaRoute
+  '/notificaciones': typeof AppNotificacionesRoute
+  '/perfil': typeof AppPerfilRoute
+  '/preparacion': typeof AppPreparacionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -91,6 +119,10 @@ export interface FileRoutesByTo {
   '/inicio': typeof AppInicioRoute
   '/investigacion': typeof AppInvestigacionRoute
   '/mapa': typeof AppMapaRoute
+  '/mascota': typeof AppMascotaRoute
+  '/notificaciones': typeof AppNotificacionesRoute
+  '/perfil': typeof AppPerfilRoute
+  '/preparacion': typeof AppPreparacionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -104,6 +136,10 @@ export interface FileRoutesById {
   '/_app/inicio': typeof AppInicioRoute
   '/_app/investigacion': typeof AppInvestigacionRoute
   '/_app/mapa': typeof AppMapaRoute
+  '/_app/mascota': typeof AppMascotaRoute
+  '/_app/notificaciones': typeof AppNotificacionesRoute
+  '/_app/perfil': typeof AppPerfilRoute
+  '/_app/preparacion': typeof AppPreparacionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -117,6 +153,10 @@ export interface FileRouteTypes {
     | '/inicio'
     | '/investigacion'
     | '/mapa'
+    | '/mascota'
+    | '/notificaciones'
+    | '/perfil'
+    | '/preparacion'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -128,6 +168,10 @@ export interface FileRouteTypes {
     | '/inicio'
     | '/investigacion'
     | '/mapa'
+    | '/mascota'
+    | '/notificaciones'
+    | '/perfil'
+    | '/preparacion'
   id:
     | '__root__'
     | '/'
@@ -140,6 +184,10 @@ export interface FileRouteTypes {
     | '/_app/inicio'
     | '/_app/investigacion'
     | '/_app/mapa'
+    | '/_app/mascota'
+    | '/_app/notificaciones'
+    | '/_app/perfil'
+    | '/_app/preparacion'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -224,6 +272,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppMapaRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/mascota': {
+      id: '/_app/mascota'
+      path: '/mascota'
+      fullPath: '/mascota'
+      preLoaderRoute: typeof AppMascotaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/notificaciones': {
+      id: '/_app/notificaciones'
+      path: '/notificaciones'
+      fullPath: '/notificaciones'
+      preLoaderRoute: typeof AppNotificacionesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/perfil': {
+      id: '/_app/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof AppPerfilRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/preparacion': {
+      id: '/_app/preparacion'
+      path: '/preparacion'
+      fullPath: '/preparacion'
+      preLoaderRoute: typeof AppPreparacionRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -231,12 +307,20 @@ interface AppRouteChildren {
   AppInicioRoute: typeof AppInicioRoute
   AppInvestigacionRoute: typeof AppInvestigacionRoute
   AppMapaRoute: typeof AppMapaRoute
+  AppMascotaRoute: typeof AppMascotaRoute
+  AppNotificacionesRoute: typeof AppNotificacionesRoute
+  AppPerfilRoute: typeof AppPerfilRoute
+  AppPreparacionRoute: typeof AppPreparacionRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppInicioRoute: AppInicioRoute,
   AppInvestigacionRoute: AppInvestigacionRoute,
   AppMapaRoute: AppMapaRoute,
+  AppMascotaRoute: AppMascotaRoute,
+  AppNotificacionesRoute: AppNotificacionesRoute,
+  AppPerfilRoute: AppPerfilRoute,
+  AppPreparacionRoute: AppPreparacionRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

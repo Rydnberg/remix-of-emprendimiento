@@ -42,7 +42,7 @@ export function LangToggle() {
   );
 }
 
-export function PageHeader({ title, subtitle, right }: { title: string; subtitle?: string; right?: ReactNode }) {
+export function PageHeader({ title, subtitle, right }: { title: string; subtitle?: string | undefined; right?: ReactNode }) {
   return (
     <header className="flex items-start justify-between gap-3 px-5 pb-4 pt-6">
       <div>
@@ -58,7 +58,7 @@ export function Card({ children, className }: { children: ReactNode; className?:
   return <section className={cn("rounded-3xl border bg-card p-5 shadow-soft", className)}>{children}</section>;
 }
 
-export function VerifiedTag({ source }: { source?: string }) {
+export function VerifiedTag({ source }: { source?: string | undefined }) {
   const { t } = useApp();
   return (
     <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">

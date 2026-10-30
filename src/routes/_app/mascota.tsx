@@ -84,7 +84,7 @@ function PetPage() {
   );
 }
 
-function PetForm({ initial, onDone, onCancel }: { initial: Pet | null; onDone: (p: Pet) => void; onCancel?: () => void }) {
+function PetForm({ initial, onDone, onCancel }: { initial: Pet | null; onDone: (p: Pet) => void; onCancel?: (() => void) | undefined }) {
   const { t } = useApp();
   const [p, setP] = useState<Pet>(initial ?? { name: "", age: "", breed: "", activity: "", behavior: "" });
   const f = (k: keyof Pet) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setP({ ...p, [k]: e.target.value });
@@ -143,7 +143,7 @@ function ReportForm() {
         ))}
       </div>
       <Label className="mt-4 block">{t("Intensidad", "Intensity")}: {int}/5</Label>
-      <Slider className="mt-3" min={1} max={5} step={1} value={[int]} onValueChange={(v) => setInt(v[0])} />
+      <Slider className="mt-3" min={1} max={5} step={1} value={[int]} onValueChange={(v) => setInt(v[0] ?? 3)} />
       <Textarea className="mt-4 rounded-2xl" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder={t("Notas (opcional)", "Notes (optional)")} />
       <div className="mt-4 flex gap-2">
         <Button variant="soft" className="flex-1" onClick={() => setOpen(false)}>{t("Cancelar", "Cancel")}</Button>

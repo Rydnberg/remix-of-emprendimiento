@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { addMonths, useApp, type Plan } from "@/lib/app-store";
 
 export const Route = createFileRoute("/registro")({
-  validateSearch: (s: Record<string, unknown>) => ({ plan: (s.plan === "monthly" ? "monthly" : "annual") as Plan }),
+  validateSearch: (s: Record<string, unknown>) => ({ plan: (s["plan"] === "monthly" ? "monthly" : "annual") as Plan }),
   head: () => ({
     meta: [
       { title: "Crear cuenta y activar membresía — Sismocan" },

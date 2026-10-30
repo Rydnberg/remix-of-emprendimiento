@@ -32,8 +32,8 @@ function HomePage() {
   const { data, isLoading } = useQuakes(30);
   const quakes = data?.quakes ?? [];
   const latest = quakes[0];
-  const tip = TIPS[new Date().getDate() % TIPS.length];
-  const lastWeek = WEEKLY_TREND[WEEKLY_TREND.length - 1];
+  const tip = TIPS[new Date().getDate() % TIPS.length]!;
+  const lastWeek = WEEKLY_TREND[WEEKLY_TREND.length - 1]!;
   const m = s.membership!;
   const hour = new Date().getHours();
   const greet = hour < 12 ? t("Buenos días", "Good morning") : hour < 19 ? t("Buenas tardes", "Good afternoon") : t("Buenas noches", "Good evening");

@@ -20,7 +20,7 @@ export const Route = createFileRoute("/_app/inicio")({
   component: HomePage,
 });
 
-const TIPS = [
+const TIPS: [string, string][] = [
   ["Revisa las pilas de tu linterna una vez al mes.", "Check your flashlight batteries monthly."],
   ["Guarda copias de tus documentos en una bolsa impermeable.", "Keep document copies in a waterproof bag."],
   ["Practica tu ruta de evacuación con toda la familia.", "Practice your evacuation route with your family."],

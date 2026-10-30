@@ -32,7 +32,7 @@ function Login() {
       toast.error(t("Correo o contraseña inválidos.", "Invalid email or password."));
       return;
     }
-    const user = s.user && s.user.email === email ? s.user : { name: email.split("@")[0], email };
+    const user = s.user && s.user.email === email ? s.user : { name: email.split("@")[0] ?? email, email };
     set({ user });
     nav({ to: s.membership?.status === "active" && s.user?.email === email ? "/inicio" : "/membresia" });
   };

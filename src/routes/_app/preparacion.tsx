@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 type Tab = "drill" | "guide" | "kit" | "family";
 export const Route = createFileRoute("/_app/preparacion")({
-  validateSearch: (s: Record<string, unknown>): { tab?: Tab } => ({ tab: ["drill", "guide", "kit", "family"].includes(s.tab as string) ? (s.tab as Tab) : undefined }),
+  validateSearch: (s: Record<string, unknown>): { tab?: Tab | undefined } => ({ tab: ["drill", "guide", "kit", "family"].includes(s["tab"] as string) ? (s["tab"] as Tab) : undefined }),
   head: () => ({
     meta: [
       { title: "Preparación ante sismos — Sismocan" },
@@ -116,7 +116,7 @@ function Drill() {
       </Card>
     );
 
-  const s = sc[i];
+  const s = sc[i]!;
   const answered = pick !== null;
   return (
     <div className="space-y-4">
@@ -142,9 +142,9 @@ function Drill() {
           ))}
         </div>
         {answered && (
-          <div className={cn("mt-4 flex gap-2 rounded-2xl p-3 text-sm animate-rise", s.opts[pick].ok ? "bg-muted" : "bg-warm-soft")}>
-            {s.opts[pick].ok ? <CheckCircle2 className="size-5 shrink-0 text-primary" /> : <XCircle className="size-5 shrink-0 text-destructive" />}
-            {s.opts[pick].fb}
+          <div className={cn("mt-4 flex gap-2 rounded-2xl p-3 text-sm animate-rise", s.opts[pick]!.ok ? "bg-muted" : "bg-warm-soft")}>
+            {s.opts[pick]!.ok ? <CheckCircle2 className="size-5 shrink-0 text-primary" /> : <XCircle className="size-5 shrink-0 text-destructive" />}
+            {s.opts[pick]!.fb}
           </div>
         )}
       </Card>
